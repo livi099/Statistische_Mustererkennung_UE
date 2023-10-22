@@ -90,7 +90,7 @@ def validate_test_points(test_p, y_te):
     acc = (sum(y_te == test_p['test_points']) / len(y_te) * 100)
     return(acc)
 
-def plot_line(data):
+def plot_line(data, k):
 
     plt.plot(data['k'], data['dataset0'])
     plt.plot(data['k'], data['dataset1'])
@@ -110,6 +110,34 @@ def plot_line(data):
     plt.grid()
     plt.show()
 
+def plot_mean(data, k):
+    mean = []
+    std = []
+    for i in range(len(data)):
+        mean_row = data.iloc[i, 1:6].mean()
+        std_row = data.iloc[i, 1:6].std()
+        mean.append(mean_row)
+        std.append(std_row)
+
+    data['Mittelwert_pro_Reihe'] = mean
+    data['Standardabweichung_pro_Reihe'] = std
+    print(data)
+
+    max_wert = data['Mittelwert_pro_Reihe'].max()
+    id_max_wert = data['Mittelwert_pro_Reihe'].idxmax()
+    k_max_wert = data.loc[id_max_wert, 'k']
+
+    print(id_max_wert)
+    plt.errorbar(data['k'], data['Mittelwert_pro_Reihe'], yerr=data['Standardabweichung_pro_Reihe'], fmt='-o')
+    plt.scatter(k_max_wert, max_wert, marker="X", label="Optimal Accuracy", s=80, color='blue')
+    plt.xticks(k)
+    plt.xlabel('Anzahl der Nachbarn (k)')
+    plt.ylabel('Genauigkeit [%]')
+    plt.grid()
+    plt.show()
+
+
+
 
 # Aufgabe 1 a)
 # Lade files
@@ -125,7 +153,7 @@ size_train = 0.5 # Größe der Trainingsmenge
 k = list(range(1, 21, 2))
 
 # Für die Reproduzierbarkeit
-random.seed(1234)
+random.seed(70)
 random_seeds = random.sample(range(10000000), n)
 
 results = pd.DataFrame({'k':k})
@@ -144,7 +172,8 @@ for seed in random_seeds:
 print(results)
 
 # Plot
-plot_line(results)
+plot_line(results, k)
+plot_mean(results, k)
 
 
 data = np.array([results['k'], results['dataset0']])
@@ -242,11 +271,13 @@ for i_seed in random_seeds:
 
 
 # Plots
-plot_line(dataset1)
-plot_line(dataset2)
-plot_line(dataset3)
-plot_line(dataset4)
-plot_line(dataset5)
+plot_line(dataset1, k)
+plot_line(dataset2, k)
+plot_line(dataset3, k)
+plot_line(dataset4, k)
+plot_line(dataset5, k)
+
+
 
 i=0
 l=0
@@ -303,9 +334,9 @@ for i_seed in random_seeds:
 
 
 # Plots
-plot_line(dataset1)
-plot_line(dataset2)
-plot_line(dataset3)
-plot_line(dataset4)
-plot_line(dataset5)
+plot_line(dataset1, k)
+plot_line(dataset2, k)
+plot_line(dataset3, k)
+plot_line(dataset4, k)
+plot_line(dataset5, k)
 
