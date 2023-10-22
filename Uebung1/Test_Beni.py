@@ -53,9 +53,9 @@ X_tr, y_tr, X_te, y_te = build_testtrain(mk, lb, n, size_train)
 
 s = []  # Ein leeres Array erstellen, um die Abstände zu speichern
 
-#for j in X_te:
-for i in X_tr:
-        s_temp = dist(X_te[0], i)
+for j in X_te:
+    for i in X_tr:
+        s_temp = dist(j, i)
 
         s.append(s_temp)  # Füge den Abstand zu s hinzu
         s_array = np.array(s)
