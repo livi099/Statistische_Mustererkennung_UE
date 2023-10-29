@@ -1,24 +1,23 @@
 # Statistische Muserekennung WS 2023
-# Laurin Koppenwallner, 11726954
 # Benjamin Stifter, 01618881
 # Olivia Panzenböck, 11775488
 
-import numpy as np
-import pandas as pd
+import math as m
 
-# Aufgabe 2
-# a
+# Aufgabe 3
+# Binomial Koeffizient
 
-# Wahrscheinlichkeit beim Wurf eines sechseitigen Würfels
-p = 1/6
+def binom(n,theta):
+    results = []
 
-# Vereinigungsmenge A U B gibt an, dass entweder A oder B eintritt
+    for r in range(n+1):
+        P = ((m.factorial(n))/(m.factorial(r)*m.factorial(n-r))) * (theta ** r) * ((1 - theta) ** (n - r))
+        results.append(P)
 
-p_A = 3 * p # 4, 5, 6
-p_B = 3 * p # 2, 4, 6
-p_AB_durchschnitt = 2 * p # 4 ,6
+    return(results)
 
-# Summenregel
-p_AB_vereinigt = p_A + p_B - p_AB_durchschnitt
 
-print(p_AB_vereinigt)
+test = binom(3, 0.7)
+
+print(test)
+
