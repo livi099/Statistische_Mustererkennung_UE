@@ -7,11 +7,26 @@ import math as m
 # Aufgabe 3
 # Binomial Koeffizient
 
-# Die Funktion binom berechnet den Binomailkoeffizient. Ihr müssen die Parameter n und theta uebergeben werden.
+# Die Funktion binom berechnet den Binomailkoeffizient. Der Funktion müssen die Parameter n und theta uebergeben werden.
 # r ist ein Vektor und geht von 0:n (natürlich in python bis n+1)
-# Der Vektor results_binom gibt dann alle P(r)-Werte als Vektor aus
+# Der Vektor results_binom gibt dann alle P(r)-Werte als Vektor aus.
 
 def binom(n,theta):
+    """
+    Berechnet den Binomailkoeffizient
+
+    Parameters
+    ----------
+    n : int
+
+    theta : double
+
+    Return
+    ----------
+    results_binom : 1D array
+
+    """
+
     results_binom = []
 
     for r in range(n+1):
@@ -19,7 +34,6 @@ def binom(n,theta):
         results_binom.append(p)
 
     return(results_binom)
-
 
 value_binom = binom(3, 0.7)
 

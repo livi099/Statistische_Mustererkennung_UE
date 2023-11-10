@@ -70,7 +70,7 @@ def dist(p1, p2):
 
 def build_testtrain(mk, lb, tr_size, seed_num):
     """
-    Bildet aus gegebenen Daten zufällige Tainings- und Testmengen
+    Bildet aus den gegebenen Daten zufällige Tainings- und Testmengen
 
     Parameters
     ----------
@@ -91,14 +91,12 @@ def build_testtrain(mk, lb, tr_size, seed_num):
     X_te : 2D array
     y_te : 1D array
     """
+
     random.seed(seed_num)
     idx = random.sample(range(len(mk)),len(mk))
     train_size = int(len(mk) * tr_size)
     idx_train = idx[:train_size]
     idx_test = idx[train_size:]
-
-    # idx_train = random.sample(range(len(mk)), 100)
-    # idx_test = [x for x in range(len(mk)) if x not in idx_train]
 
     X_tr = mk[idx_train] # Merkmal training
     y_tr = lb[idx_train] # Label training
@@ -110,7 +108,7 @@ def build_testtrain(mk, lb, tr_size, seed_num):
 
 def validate_test_points(test_p, y_te):
     """
-    Vergleicht die Übereinstimmung der "originalen" Labels mit den neuen Labels und berechnet die Genauigkeit
+    Vergleicht die Uebereinstimmung der "originalen" Labels mit den neu bestimmten Labels und berechnet die Genauigkeit
 
     Parameters
     ----------
@@ -170,6 +168,7 @@ def plot_mean(data, name):
 
     name : string
     """
+
     mean = []
     std = []
     for i in range(len(data)):
@@ -198,6 +197,7 @@ def plot_mean(data, name):
 
 def cv_sets(X_tr, y_tr, n_fold):
     """
+    Bildet Datensets für die Kreuzvalidierung
 
     Parameters
     ----------
@@ -229,7 +229,7 @@ def cv_sets(X_tr, y_tr, n_fold):
     return (cv_set_X_tr, cv_set_y_tr)
 
 def crossvalidation(set_X_cv, set_y_cv, j):
-    """
+    """ Kreuzvalidierung
 
     Parameters
     ----------
@@ -259,7 +259,6 @@ def crossvalidation(set_X_cv, set_y_cv, j):
         corr_array.append(corr)
 
     return (corr_array)
-
 
 #---------------------------------------------------------------------------------------------------
 
@@ -387,7 +386,6 @@ for i_seed in random_seeds:
         d8.append(cross[8])
         d9.append(cross[9])
     if l==0:
-        #dataset1=pd.DataFrame([k,d0,d1,d2,d3,d4],columns=['k',"dataset0","dataset1","dataset2","dataset3","dataset4"])
         datasets = ['dataset0', 'dataset1', 'dataset2', 'dataset3', 'dataset4', 'dataset5', 'dataset6', 'dataset7', 'dataset8', 'dataset9']
         data.update({dataset: d for dataset, d in zip(datasets, [d0, d1, d2, d3, d4, d5, d6, d7, d8, d9])})
         dataset1 = pd.DataFrame(data)
