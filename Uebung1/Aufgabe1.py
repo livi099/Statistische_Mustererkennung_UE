@@ -12,19 +12,21 @@ import matplotlib.pyplot as plt
 
 def kNN(X_tr, y_tr, X_te, k):
     """
-    Differentialgleichung für Pareto-Verteilung
+    Klassifiziert aus den k-nächsten Nachbarn einen Testwert
 
     Parameters
     ----------
-    x : float
+    X_tr : 2D array
 
-    alpha : float
+    y_tr : 1D array
 
-    x_min : float
+    X_te : 2D array
+
+    k : int
 
     Return
     ----------
-    df : float
+    df_results : dataframe
     """
 
     test_points=[]
@@ -108,7 +110,7 @@ def build_testtrain(mk, lb, tr_size, seed_num):
 
 def validate_test_points(test_p, y_te):
     """
-    Vergleicht die Übereinstimmung der "originalen" Labels mit den neuwn Labels und berechnet die Genauigkeit
+    Vergleicht die Übereinstimmung der "originalen" Labels mit den neuen Labels und berechnet die Genauigkeit
 
     Parameters
     ----------
@@ -133,7 +135,7 @@ def plot_line(data, name):
     ----------
     data : dataframe
 
-    y_te : 1D array
+    name : 1D array
     """
 
     plt.plot(data['k'], data['dataset0'], label="Dataset1")
@@ -154,7 +156,7 @@ def plot_line(data, name):
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.14),
           ncol=5, fancybox=True, prop={'size': 9})
     plt.grid()
-    plt.savefig('plots/line/line_dataset' + name + '.eps', format='eps')
+    # plt.savefig('plots/Aufgabe1/line/line_dataset' + name + '.eps', format='eps')
     plt.show()
 
 
@@ -166,7 +168,7 @@ def plot_mean(data, name):
     ----------
     data : dataframe
 
-    y_te : 1D array
+    name : string
     """
     mean = []
     std = []
@@ -190,7 +192,7 @@ def plot_mean(data, name):
     plt.xlabel('k')
     plt.ylabel('Genauigkeit [%]')
     plt.grid()
-    plt.savefig('plots/mean/mean_dataset' + name + '.eps', format='eps')
+    # plt.savefig('plots/Aufgabe1/mean/mean_dataset' + name + '.eps', format='eps')
     plt.show()
 
 
@@ -208,6 +210,7 @@ def cv_sets(X_tr, y_tr, n_fold):
     Return
     ----------
     cv_set_X_tr : list
+
     cv_set_y_tr : list
     """
 
@@ -273,7 +276,7 @@ size_train = 0.5 # Größe der Trainingsmenge
 k = list(range(1, 21, 2))
 
 # Für die Reproduzierbarkeit
-random.seed(70)
+random.seed(759)
 random_seeds = random.sample(range(10000000), n)
 
 results = pd.DataFrame({'k':k})
@@ -288,7 +291,7 @@ for seed in random_seeds:
         arr.append(corr)
     results['dataset%s'%i] = arr
     i = i + 1
-print(results)
+
 
 # Plot
 plot_line(results,'0')

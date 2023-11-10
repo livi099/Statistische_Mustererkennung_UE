@@ -59,7 +59,7 @@ def pareto_ew(alpha, x_min, n):
 
 
 # Eingabeparameter
-alpha = [1.16]
+alpha = [1.16, 2, 6, 10]
 x_min = 1.0
 n = np.linspace(3, 100, 100)
 q = np.linspace(0.0, 1.0, 1000)
@@ -75,5 +75,7 @@ plt.title(r'Lorenz-Kurve ($x_{min}=1$)')
 plt.xlabel('q')
 plt.ylabel('L(q)')
 plt.legend()
+plt.grid()
+# plt.savefig('plots/Aufgabe4/Lorenzkurve.eps', format='eps')
 plt.show()
 
