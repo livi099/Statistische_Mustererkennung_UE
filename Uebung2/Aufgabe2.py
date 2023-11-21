@@ -92,3 +92,6 @@ p_x = randverteilung(x,p_x_omega1, p_x_omega2, p_omega1, p_omega2)
 # Berechnung des posterior
 p_pos1 = posterior(x, p_omega1, p_x_omega1, p_x)
 p_pos2 = posterior(x, p_omega2, p_x_omega2, p_x)
+
+# Bayes decicion rule
+sample = [-15, -10, -5, 0, 5, 10]
