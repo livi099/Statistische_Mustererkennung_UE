@@ -146,7 +146,7 @@ intersection_point = x[intersection_index]
 # Plot für Posteriors
 ax2.plot(x, p_pos1, label=r'$p(\omega_1|x)$', color=color_omega1)
 ax2.plot(x, p_pos2, label=r'$p(\omega_2|x)$', color=color_omega2)
-ax2.axvline(x=intersection_point, color=color_decision_boundary, linestyle='--', label='Schnittpunkt')
+ax2.axvline(x=intersection_point, color=color_decision_boundary, linestyle='--', label='Entscheidungsgrenze')
 for i in range(len(SAMPLE)):
     x_i = SAMPLE[i]
     color = color_omega1 if sample_class[i] == 1 else color_omega2
