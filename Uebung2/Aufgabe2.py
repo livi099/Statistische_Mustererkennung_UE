@@ -112,7 +112,7 @@ for i in range(len(SAMPLE)):
     else:
         class_description = 'Klasse 2'
 
-    table_data.append([f'Merkmal X={x_i}', class_description, f'Posterior: {posterior_value:.4f}'])
+    table_data.append([f'X={x_i}', class_description, f'Posterior: {posterior_value:.4f}'])
 
 # Tabellarische Darstellung
 headers = ["Merkmal", "Zugeordnete Klasse", "Posterior"]
