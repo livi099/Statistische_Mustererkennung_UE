@@ -108,14 +108,14 @@ for i in range(len(SAMPLE)):
     posterior_value = sample_posterior[i]
 
     if assigned_class == 1:
-        class_description = 'Klasse 1'
+        class_description = '1'
     else:
-        class_description = 'Klasse 2'
+        class_description = '2'
 
-    table_data.append([f'X={x_i}', class_description, f'Posterior: {posterior_value:.4f}'])
+    table_data.append([f'X={x_i}', class_description, f'{posterior_value:.4f}'])
 
 # Tabellarische Darstellung
-headers = ["Merkmal", "Zugeordnete Klasse", "Posterior"]
+headers = ["Merkmal", "Klasse", "Posterior"]
 table = tabulate(table_data, headers, tablefmt="grid")
 
 print(table)
