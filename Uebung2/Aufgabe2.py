@@ -123,9 +123,9 @@ print(table)
 # Aufgabe 2c
 # Farbdefinitionen
 color_omega1 = 'green'
-color_omega2 = 'red'
+color_omega2 = 'blue'
 color_decision_boundary = 'black'
-color_rand_distribution = 'blue'
+color_rand_distribution = 'red'
 
 # Plot für Dichtefunktion
 plt.figure(figsize=(10, 4))
@@ -133,9 +133,11 @@ plt.plot(x, p_x_omega1, label=r'$p(x|\omega_1)$', color=color_omega1)
 plt.plot(x, p_x_omega2, label=r'$p(x|\omega_2)$', color=color_omega2)
 plt.title('Dichtefunktion')
 plt.grid(True)
+plt.xlabel(r'$X$')
 plt.xlim([-20, 15])
 plt.ylabel(r'$p(x|\omega_i)$')
 plt.legend()
+plt.savefig('plots/Aufgabe2/a2_df.png', format='png')
 plt.show()
 
 # Finden des Schnittpunkts der beiden Kurven
@@ -153,10 +155,12 @@ for i in range(len(SAMPLE)):
     plt.scatter(x_i, sample_posterior[i], marker='o', color=color, s=60)
 plt.title('Posteriors')
 plt.grid(True)
+plt.xlabel(r'$X$')
 plt.xlim([-20, 15])
 plt.ylabel(r'$p(\omega_i|x)$')
 plt.legend()
 plt.ylim([-0.1, 1.1])
+plt.savefig('plots/Aufgabe2/a2_posterior.png', format='png')
 plt.show()
 
 # Plot für Randverteilung von X
@@ -164,7 +168,9 @@ plt.figure(figsize=(10, 4))
 plt.plot(x, p_x, label=r'$p(x)$', color=color_rand_distribution)
 plt.title('Randverteilung von X')
 plt.grid(True)
+plt.xlabel(r'$X$')
 plt.xlim([-20, 15])
 plt.ylabel(r'$p(x)$')
 plt.legend()
+plt.savefig('plots/Aufgabe2/a2_evidence.png', format='png')
 plt.show()
