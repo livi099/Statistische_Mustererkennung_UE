@@ -1,4 +1,4 @@
-# Statistische Muserekennung WS 2023
+# Statistische Musterekennung WS 2023
 # Benjamin Stifter, 01618881
 # Olivia Panzenböck, 11775488
 
@@ -44,9 +44,11 @@ plt.plot(x_values, VW2, color='blue', label=r'$H_0=0.99, H_1=0.01$')
 plt.title('Positiver Vorhersagewert als Funktion der Entscheidungsgrenze', fontsize=24)
 plt.ylabel(r'$p(H_1|+)$', fontsize=20)
 plt.xlabel(r'$x^*$', fontsize=20)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
 plt.legend(fontsize=20)
 plt.grid(True)
-plt.savefig('plots/Aufgabe3/a.png', format='png')
+plt.savefig('plots/Aufgabe3/a.eps', format='eps')
 plt.show()
 
 # Aufgabe b)
@@ -95,8 +97,10 @@ plt.title(r'Wahrscheinlichkeitsfuntion und Posterioris von $H_0=0.9$ und $H_1=0.
 plt.grid(True)
 plt.ylabel(r'$p(x|H_i)$', fontsize=20)
 plt.xlabel(r'$x$', fontsize=20)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
 plt.legend(fontsize=20)
-plt.savefig('plots/Aufgabe3/b_1.png', format='png')
+plt.savefig('plots/Aufgabe3/b_1.eps', format='eps')
 plt.show()
 
 # Wahrscheinlichkeitsfuntion und Posterioris (H0 = 0.99, H1 = 0.01)
@@ -112,8 +116,10 @@ plt.title(r'Wahrscheinlichkeitsfuntion und Posterioris von $H_0=0.99$ und $H_1=0
 plt.grid(True)
 plt.ylabel(r'$p(x|H_i)$', fontsize=20)
 plt.xlabel(r'$x$', fontsize=20)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
 plt.legend(fontsize=20)
-plt.savefig('plots/Aufgabe3/b_2.png', format='png')
+plt.savefig('plots/Aufgabe3/b_2.eps', format='eps')
 plt.show()
 
 # Plot beider Posterioris und Entscheidungsgrenzen
@@ -128,10 +134,12 @@ plt.title('Posteriors beider Prävalenzpaare mit Entscheidungsgrenzen', fontsize
 plt.grid(True)
 plt.ylabel(r'$p(H_i|x)$', fontsize=20)
 plt.xlabel(r'$x$', fontsize=20)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
 plt.legend(fontsize=20)
 idx1 = np.argwhere(np.diff(np.sign(np.array(p_H0_x_9) - np.array(p_H1_x_9)))).flatten()
 idx2 = np.argwhere(np.diff(np.sign(np.array(p_H0_x_99) - np.array(p_H1_x_99)))).flatten()
-plt.savefig('plots/Aufgabe3/b_3.png', format='png')
+plt.savefig('plots/Aufgabe3/b_3.eps', format='eps')
 plt.show()
 
 # Aufgabe c)
@@ -141,8 +149,10 @@ plt.plot(False_P, True_P, color='green')
 plt.title('ROC-Kruve (receiver operating characteristic)', fontsize=24)
 plt.xlabel(r'$\alpha$', fontsize=20)
 plt.ylabel(r'$1 - \beta$', fontsize=20)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
 plt.grid(True)
-plt.savefig('plots/Aufgabe3/c.png', format='png')
+plt.savefig('plots/Aufgabe3/c.eps', format='eps')
 plt.show()
 
 

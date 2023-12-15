@@ -1,4 +1,4 @@
-# Statistische Muserekennung WS 2023
+# Statistische Musterekennung WS 2023
 # Benjamin Stifter, 01618881
 # Olivia Panzenböck, 11775488
 
@@ -14,13 +14,14 @@ import warnings
 from scipy.stats import chi2
 
 
-
 # Aufgabe 1
 
 # suppress warnings
 warnings.filterwarnings('ignore')
 
 def plot_rand(name, data, sizes_samp, colors, var):
+    "Funktion erzeugt Histogramm Plot und Dichtefunktion"
+
     plt.figure(figsize=(18, 12))
     x_values = np.linspace(0, 10, 10000)
     for i, estimator in enumerate(['Stichprobenmittel', 'Stichprobenvarianz', 'Stichprobenmeridian'], start=1):
@@ -43,8 +44,9 @@ def plot_rand(name, data, sizes_samp, colors, var):
                 # p_x=norm.pdf(x_values, loc=mu, scale=var / size)
 
                 ax2.plot(x_values, p_x, color=colors[j], linestyle='--')
-                ax2.set_ylabel('p(x)')
-                ax2.set_ylim([0, 6])
+                ax2.set_ylabel('p(x)',fontsize=18)
+                ax2.tick_params(axis='both', labelsize=15)
+                ax2.set_ylim([0, 1])
 
             elif estimator == 'Stichprobenvarianz':
                 ax2 = ax.twinx()
@@ -57,16 +59,19 @@ def plot_rand(name, data, sizes_samp, colors, var):
                 p_x = (a * np.power(x_values2, (n / 2 - 1)) * np.exp(-x_values2 / 2)) / (var / n)
 
                 ax2.plot(x_values, p_x, color=colors[j], linestyle='--')
-                ax2.set_ylabel('p(x)')
+                ax2.set_ylabel('p(x)',fontsize=18)
+                ax2.tick_params(axis='both', labelsize=15)
                 ax2.set_ylim([0, 1])
             j = j + 1
-            ax.set_title(f'{estimator}')
+            ax.set_title(f'{estimator}',fontsize=18)
             if estimator == "Stichprobenmeridian":
-                ax.set_xlabel('Schätzwert')
-            ax.set_ylabel('Häufigkeit')
+                ax.set_xlabel('Schätzwert',fontsize=18)
+            if estimator == "Stichprobenmittel":
+                ax.legend(fontsize=18)
+            ax.set_ylabel('Häufigkeit',fontsize=18)
             ax.set_xlim([0, 10])
             ax.set_ylim([0, 70])
-            ax.legend()
+            ax.tick_params(axis='both', labelsize=15)
             plt.savefig('plots/Aufgabe1/emp_ver_' + name +'.png', format='png')
 
         # --------------------------------------------------------------------------------------------------------------------
@@ -83,6 +88,8 @@ def plot_rand(name, data, sizes_samp, colors, var):
     plt.show()
 
 def plot_boot(size, df, mu, var, number_str):
+    "Funktion erzeugt Histogramm Plot und Dichtefunktion"
+
     plt.figure(figsize=(18, 12))
     x_values = np.linspace(0, 10, 1000)
 
@@ -104,7 +111,8 @@ def plot_boot(size, df, mu, var, number_str):
             # p_x=norm.pdf(x_values, loc=mu, scale=var / size)
 
             ax2.plot(x_values, p_x, color=colors[j], linestyle='--')
-            ax2.set_ylabel('p(x)')
+            ax2.set_ylabel('p(x)',fontsize=18)
+            ax2.tick_params(axis='both', labelsize=15)
             ax2.set_ylim([0, 6])
 
         elif estimator == 'Stichprobenvarianz':
@@ -118,16 +126,19 @@ def plot_boot(size, df, mu, var, number_str):
             p_x = (a * np.power(x_values2, (n / 2 - 1)) * np.exp(-x_values2 / 2)) / (var / n)
 
             ax2.plot(x_values, p_x, color=colors[j], linestyle='--')
-            ax2.set_ylabel('p(x)')
+            ax2.set_ylabel('p(x)',fontsize=18)
+            ax2.tick_params(axis='both', labelsize=15)
             ax2.set_ylim([0, 1])
 
-        ax.set_title(f'{estimator}')
+        ax.set_title(f'{estimator}',fontsize=18)
         if estimator == "Stichprobenmeridian":
-            ax.set_xlabel('Schätzwert')
-        ax.set_ylabel('Häufigkeit')
+            ax.set_xlabel('Schätzwert',fontsize=18)
+        if estimator == "Stichprobenmittel":
+            ax.legend(fontsize=18)
+        ax.set_ylabel('Häufigkeit',fontsize=18)
         ax.set_xlim([0, 10])
         ax.set_ylim([0, 70])
-        ax.legend()
+        ax.tick_params(axis='both', labelsize=15)
         plt.savefig('plots/Aufgabe1/bootstrap_' + str(size) +'.png', format='png')
 
     plt.tight_layout(rect=[0, 0, 1, 0.96])
@@ -135,21 +146,21 @@ def plot_boot(size, df, mu, var, number_str):
 
 
 def calculate_statistics(samples,t):
+    "Funktion berechnet den Mittelwert, den Median und die Varianz"
+
     means = np.sum(samples, axis=1) / np.size(samples, axis=1)
     var_sums = (samples - means[:, np.newaxis]) ** 2
     if t == 0:
-        vars = np.sum(var_sums, axis=1) / np.size(var_sums, axis=1) # wenn wahres Mittel bekannt
+        vars = np.sum(var_sums, axis=1) / np.size(var_sums, axis=1) # wenn wahres Mittel bekannt ist
     elif t == 1:
-        vars = np.sum(var_sums, axis=1) / (np.size(var_sums, axis=1)-1) ## wenn wahres Mittel nicht bekannt
+        vars = np.sum(var_sums, axis=1) / (np.size(var_sums, axis=1)-1) # wenn wahres Mittel nicht bekannt ist
     else:
         print('Nur 0 oder 1 möglich!')
 
     medians = np.median(samples, axis=1)
     return means, vars, medians
 
-# Seed für die Reproduzierbarkeit der Zufallszahlen setzen
-
-
+# Reproduzierbarkeit der Zufallszahlen
 np.random.seed(234) 
 
 
