@@ -1,21 +1,23 @@
-# Statistische Mustererkennung UE
+# Statistische Mustererkennung UE 183.584
 
-## Aufgabe 1
-Implementieren Sie die Funktion y te = kNN(X tr, y tr, X te, k), welche - gegeben die Trainingsmenge (Merkmale, Label) = (X tr, y tr ) - mittels
-kNN die Klassen-Labels für die Test-Merkmalsvektoren in X te berechnet. Sie können annehmen, dass es nur 2 Klassen gibt.
+## Allgemeine Hinweise
+Es gibt 3 Übungsababen pro Semester, die in Übungsgruppen ausgearbeitet werden sollen. Die UE-Gruppeneinteilung erfolgt in einer der ersten VO-Einheiten. Die Übungsbeispiele können dabei in einer beliebigen Sprache/Umgebung gelöst werden, geeignet sind z.B. MATLAB oder python/numpy.
 
-a) Unterteilen Sie die Daten in den Eingabedateien (Merkmale, Label) = (perceptrondata.txt perceptrontarget2.txt)
-wiederholt, mindestens jedoch 5 mal, in eine jeweils gleich große Test- und Trainingsmenge. Ermitteln Sie Test- und Trainingsfehler für verschiedene
-Werte von k (z.B [1, 3, 5, .., 17 ]), und stellen Sie diese in geeigneter Form dar.
+Sofern nicht anders angegeben, sind alle in der Angabe geforderten Funktionen selbst zu implementieren.
 
-b) Bestimmen Sie füur jede der obigen Aufteilungen in Test- und Trainingsmenge den optimalen Wert für k mittels 5- und 10-facher Kreuzvalidierung.
+Die Abgabe sollte a) ein in PDF vorliegendes Protokoll b) sowie die Source-Dateien enthalten, und erfolgt via e-mail mit der Gruppennummer im Betreff an mich.
 
+Für die Erstellung des PDF-Dokuments wird Latex empfohlen. Dieses muss jedenfalls für jede Teilaufgabe eine Beschreibung des gewählten Lösungsansatzes sowie eine Diskussion der erhaltenen Ergebnisse enthalten.
 
-## Aufgabe 2
-Bezeichne X die geworfene Augenzahl eines fairen, 6-seitigen Würfels. Bezeichne weiters A das Ereignis X > 4 und B das Ereignis gerade(X).
+Bei Unklarheiten führe ich nach erfolgter elektronischer Abgabe ein ca 20-minütiges Abgabegespräch mit der gesamten Gruppe. Jedes Gruppenmitglied sollte in der Lage sein, Fragen zu sämtlichen ausgearbeiteten Beispielen als auch zur relevanten Theorie zu beantworten.
 
-a) Berechnen Sie P(A U B) mittels der Summmenregel.
+## Abgaben
 
-b) Berechnen Sie die 2 x 2 Kontingenztafel bzg. der obigen Ereignisse. 
-Diese lässt sich auch als Kontingenztafel zweier abgeleiteter boolscher Zufallsvariablen mit Y = X > 4 und Z = gerade(X) auffassen. Sind
-Y und Z unabhängig?
+1ste Beispielgruppe
+Abgabetermin: 11.Nov.2023
+
+2te Beispielgruppe
+Abgabetermin: 16.Dez.2023
+
+3te Beispielgruppe
+Abgabetermin: 26.Jan.2024
