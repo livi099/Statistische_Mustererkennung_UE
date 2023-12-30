@@ -113,7 +113,7 @@ def plot_boot(size, df, mu, var, number_str):
             ax2.plot(x_values, p_x, color=colors[j], linestyle='--')
             ax2.set_ylabel('p(x)',fontsize=18)
             ax2.tick_params(axis='both', labelsize=15)
-            ax2.set_ylim([0, 6])
+            ax2.set_ylim([0, 1])
 
         elif estimator == 'Stichprobenvarianz':
             ax2 = ax.twinx()
