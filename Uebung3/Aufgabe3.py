@@ -36,7 +36,7 @@ def schnittpunkt(grenze1, grenze2,x):
     return x_wert.item(), y_wert.item()
 
 def fehlerberechnung(Testwert, Klassengrenze):
-    # Berechnung, ob Wert in Klasse liegt
+    # Prüfen, ob Wert in Klasse liegt
     border = path.Path(Klassengrenze)
     inlier = border.contains_points(Testwert)
 
@@ -86,6 +86,8 @@ for i in range(num_class):
 fak = 1/(len(ldaTrain)-num_class)
 C = fak*sum(C)
 
+print(C)
+
 x = np.array([-10, 15])
 
 grenze12 = entscheidungsgrenze(mean_values, pw_values, C, 0, 1, x)
@@ -98,9 +100,9 @@ schnitt_x, schnitt_y = schnittpunkt(grenze12, grenze13,x)
 #Plot
 # Trainingsdaten
 plt.figure(figsize=(6, 5))
-plt.scatter(train_values[0][:,0], train_values[0][:,1], 20, edgecolor='#879e82', facecolors='none', label='Klasse 1')
-plt.scatter(train_values[1][:,0], train_values[1][:,1], 20, edgecolor='#194a7a', facecolors='none', label='Klasse 2')
-plt.scatter(train_values[2][:,0], train_values[2][:,1], 20, edgecolor='#c7522a', facecolors='none', label='Klasse 3')
+plt.scatter(train_values[0][:,0], train_values[0][:,1], 20, edgecolor='blue', facecolors='none', label='Klasse 1')
+plt.scatter(train_values[1][:,0], train_values[1][:,1], 20, edgecolor='green', facecolors='none', label='Klasse 2')
+plt.scatter(train_values[2][:,0], train_values[2][:,1], 20, edgecolor='orange', facecolors='none', label='Klasse 3')
 
 plt.plot([schnitt_x, 15],[schnitt_y, grenze12[1]],'k-.', label='Klassengrenze',linewidth=0.8)
 plt.plot([-10, schnitt_x],[grenze13[0], schnitt_y],'k-.',linewidth=0.8)
@@ -117,9 +119,9 @@ plt.show()
 
 # Testdaten
 plt.figure(figsize=(6, 5))
-plt.scatter(test_values[0][:,0], test_values[0][:,1], 20, edgecolor='#879e82', facecolors='none', label='Klasse 1')
-plt.scatter(test_values[1][:,0], test_values[1][:,1], 20, edgecolor='#194a7a', facecolors='none', label='Klasse 2')
-plt.scatter(test_values[2][:,0], test_values[2][:,1], 20, edgecolor='#c7522a', facecolors='none', label='Klasse 3')
+plt.scatter(test_values[0][:,0], test_values[0][:,1], 20, edgecolor='blue', facecolors='none', label='Klasse 1')
+plt.scatter(test_values[1][:,0], test_values[1][:,1], 20, edgecolor='green', facecolors='none', label='Klasse 2')
+plt.scatter(test_values[2][:,0], test_values[2][:,1], 20, edgecolor='orange', facecolors='none', label='Klasse 3')
 
 plt.plot([schnitt_x, 15],[schnitt_y, grenze12[1]],'k-.', label='Klassengrenze',linewidth=0.8)
 plt.plot([-10, schnitt_x],[grenze13[0], schnitt_y],'k-.',linewidth=0.8)
