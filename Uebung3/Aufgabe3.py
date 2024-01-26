@@ -26,11 +26,11 @@ def entscheidungsgrenze(Mittelwert, Wahrscheinlichkeit, Kovarianzmatrix, j, k, x
 
 def schnittpunkt(grenze1, grenze2,x):
     # Berechnung des Schnittpunktes zweier Entscheidungsgrenzen
-    f1 = np.polyfit(x, grenze1, 1)
-    f2 = np.polyfit(x, grenze2, 1)
+    polyfit_f1 = np.polyfit(x, grenze1, 1)
+    polyfit_f2 = np.polyfit(x, grenze2, 1)
 
-    poly1d_f1 = np.poly1d(f1)
-    poly1d_f2 = np.poly1d(f2)
+    poly1d_f1 = np.poly1d(polyfit_f1)
+    poly1d_f2 = np.poly1d(polyfit_f2)
 
     x_wert = fsolve(lambda x: poly1d_f1(x) - poly1d_f2(x), 0.0)
     y_wert = poly1d_f1(x_wert)
@@ -93,8 +93,12 @@ print("Gepoolte Kovarianzmatrix C:")
 for row in C:
     print(" ".join(map(str, row)))
 
+print()
+
+# Definition des Wertebereichs
 x = np.array([-10, 15])
 
+# Berechnung der Entscheidungsgrenze
 grenze12 = entscheidungsgrenze(mean_values, pw_values, C, 0, 1, x)
 grenze13 = entscheidungsgrenze(mean_values, pw_values, C, 0, 2, x)
 grenze23 = entscheidungsgrenze(mean_values, pw_values, C, 1, 2, x)
@@ -102,22 +106,26 @@ grenze23 = entscheidungsgrenze(mean_values, pw_values, C, 1, 2, x)
 # Berechnung des Schnittpunktes
 schnitt_x, schnitt_y = schnittpunkt(grenze12, grenze13,x)
 
-#Plot
+# Führen zum Gleichen Ergebnis, daher auskommentiert
+# schnitt_x, schnitt_y = schnittpunkt(grenze12, grenze23,x)
+# schnitt_x, schnitt_y = schnittpunkt(grenze13, grenze23,x)
+
+# Plot
 # Trainingsdaten
 plt.figure(figsize=(6, 5))
 plt.scatter(train_values[0][:,0], train_values[0][:,1], 20, edgecolor='blue', facecolors='none', label='\u03C9\u2081')
 plt.scatter(train_values[1][:,0], train_values[1][:,1], 20, edgecolor='green', facecolors='none', label='\u03C9\u2082')
 plt.scatter(train_values[2][:,0], train_values[2][:,1], 20, edgecolor='orange', facecolors='none', label='\u03C9\u2083')
-
+# Klassengrenzen
 plt.plot([schnitt_x, 15],[schnitt_y, grenze12[1]],'k-.', label='Klassengrenze',linewidth=0.5)
 plt.plot([-10, schnitt_x],[grenze13[0], schnitt_y],'k-.',linewidth=0.5)
 plt.plot([schnitt_x, 15],[schnitt_y, grenze23[1]],'k-.',linewidth=0.5)
-
+# Beschriftung
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.ylim((-17,8))
 plt.xlim((-10,15))
-plt.title('Trainingsdaten und Klassengrenzen')
+plt.title('Trainingsdaten mit Klassengrenzen')
 plt.legend(loc='lower right')
 plt.savefig('plots/Aufgabe3/Trainingsdaten.eps', format='eps')
 plt.show()
@@ -127,59 +135,41 @@ plt.figure(figsize=(6, 5))
 plt.scatter(test_values[0][:,0], test_values[0][:,1], 20, edgecolor='blue', facecolors='none', label='\u03C9\u2081')
 plt.scatter(test_values[1][:,0], test_values[1][:,1], 20, edgecolor='green', facecolors='none', label='\u03C9\u2082')
 plt.scatter(test_values[2][:,0], test_values[2][:,1], 20, edgecolor='orange', facecolors='none', label='\u03C9\u2083')
-
+# Klassengrenzen
 plt.plot([schnitt_x, 15],[schnitt_y, grenze12[1]],'k-.', label='Klassengrenze',linewidth=0.5)
 plt.plot([-10, schnitt_x],[grenze13[0], schnitt_y],'k-.',linewidth=0.5)
 plt.plot([schnitt_x, 15],[schnitt_y, grenze23[1]],'k-.',linewidth=0.5)
-
+# Beschriftung
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.ylim((-17,8))
 plt.xlim((-10,15))
-plt.title('Testdaten und Klassengrenzen')
+plt.title('Testdaten mit Klassengrenzen')
 plt.legend(loc='lower right')
 plt.savefig('plots/Aufgabe3/Testdaten.eps', format='eps')
 plt.show()
 
 # Berechnung der falsch klassifizierten Werte
-# Klasse 1
+# Klassengrenzen
 Klassengrenze_1 = [(x[0], grenze13[0]), (schnitt_x, schnitt_y), (x[1], grenze12[1]), (x[0], grenze12[1])]
-abs_train_1 = fehlerberechnung(train_values[0], Klassengrenze_1)
-abs_test_1 = fehlerberechnung(test_values[0], Klassengrenze_1)
-rel_train_1 = 100/len(train1)*abs_train_1
-rel_test_1 = 100/len(test1)*abs_test_1
-
-print(f"Absoluter Fehler der klassifizierten Trainingsdaten (Klasse \u03C9\u2081): {abs_train_1}")
-print(f"Relativer Fehler der klassifizierten Trainingsdaten (Klasse \u03C9\u2081): {rel_train_1}%")
-print(f"Absoluter Fehler der klassifizierten Testdaten (Klasse \u03C9\u2081): {abs_test_1}")
-print(f"Relativer Fehler der klassifizierten Testdaten (Klasse \u03C9\u2081): {rel_test_1}%")
-print()
-
-# Klasse 2
 Klassengrenze_2 = [(x[1], grenze23[1]), (schnitt_x, schnitt_y), (x[1], grenze12[1])]
-abs_train_2 = fehlerberechnung(train_values[1], Klassengrenze_2)
-abs_test_2 = fehlerberechnung(test_values[1], Klassengrenze_2)
-rel_train_2 = 100/len(train2)*abs_train_2
-rel_test_2 = 100/len(test2)*abs_test_2
-
-print(f"Absoluter Fehler der klassifizierten Trainingsdaten (Klasse \u03C9\u2082): {abs_train_2}")
-print(f"Relativer Fehler der klassifizierten Trainingsdaten (Klasse \u03C9\u2082): {rel_train_2}%")
-print(f"Absoluter Fehler der klassifizierten Testdaten (Klasse \u03C9\u2082): {abs_test_2}")
-print(f"Relativer Fehler der klassifizierten Testdaten (Klasse \u03C9\u2082): {rel_test_2}%")
-print()
-
-# Klasse 3
 Klassengrenze_3 = [(x[0], grenze13[0]), (schnitt_x, schnitt_y), (x[1], grenze23[1]), (x[0], grenze23[1])]
-abs_train_3 = fehlerberechnung(train_values[2], Klassengrenze_3)
-abs_test_3 = fehlerberechnung(test_values[2], Klassengrenze_3)
-rel_train_3 = 100/len(train3)*abs_train_3
-rel_test_3 = 100/len(test3)*abs_test_3
 
-print(f"Absoluter Fehler der klassifizierten Trainingsdaten (Klasse \u03C9\u2083): {abs_train_3}")
-print(f"Relativer Fehler der klassifizierten Trainingsdaten (Klasse \u03C9\u2083): {rel_train_3}%")
-print(f"Absoluter Fehler der klassifizierten Testdaten (Klasse \u03C9\u2083): {abs_test_3}")
-print(f"Relativer Fehler der klassifizierten Testdaten (Klasse \u03C9\u2083): {rel_test_3}%")
-print()
+# Trainingsdaten
+abs_train_1 = fehlerberechnung(train_values[0], Klassengrenze_1)
+rel_train_1 = 100/len(train1)*abs_train_1
+abs_train_2 = fehlerberechnung(train_values[1], Klassengrenze_2)
+rel_train_2 = 100/len(train2)*abs_train_2
+abs_train_3 = fehlerberechnung(train_values[2], Klassengrenze_3)
+rel_train_3 = 100/len(train3)*abs_train_3
+
+# Testdaten
+abs_test_1 = fehlerberechnung(test_values[0], Klassengrenze_1)
+rel_test_1 = 100/len(test1)*abs_test_1
+abs_test_2 = fehlerberechnung(test_values[1], Klassengrenze_2)
+rel_test_2 = 100/len(test2)*abs_test_2
+abs_test_3 = fehlerberechnung(test_values[2], Klassengrenze_3)
+rel_test_3 = 100/len(test3)*abs_test_3
 
 # Gesamtfehler
 abs_train_all = abs_train_1 + abs_train_2 + abs_train_3
@@ -187,6 +177,27 @@ abs_test_all = abs_test_1 + abs_test_2 + abs_test_3
 rel_train_all = 100/len(data_train)*abs_train_all
 rel_test_all = 100/len(data_test)*abs_test_all
 
+# Ausgabe
+print(f"Absoluter Fehler der klassifizierten Trainingsdaten:")
+print(f"Klasse \u03C9\u2081: {abs_train_1}")
+print(f"Klasse \u03C9\u2082: {abs_train_2}")
+print(f"Klasse \u03C9\u2083: {abs_train_3}")
+print()
+print(f"Relativer Fehler der klassifizierten Trainingsdaten:")
+print(f"Klasse \u03C9\u2081: {rel_train_1}%")
+print(f"Klasse \u03C9\u2082: {rel_train_2}%")
+print(f"Klasse \u03C9\u2083: {rel_train_3}%")
+print()
+print(f"Absoluter Fehler der klassifizierten Testdaten:")
+print(f"Klasse \u03C9\u2081: {abs_test_1}")
+print(f"Klasse \u03C9\u2082: {abs_test_2}")
+print(f"Klasse \u03C9\u2083: {abs_test_3}")
+print()
+print(f"Relativer Fehler der klassifizierten Testdaten:")
+print(f"Klasse \u03C9\u2081: {rel_test_1}%")
+print(f"Klasse \u03C9\u2082: {rel_test_2}%")
+print(f"Klasse \u03C9\u2083: {rel_test_3}%")
+print()
 print(f"Absoluter Fehler aller Trainingswerte: {abs_train_all}")
 print(f"Relativer Fehler aller Trainingswerte: {rel_train_all}%")
 print(f"Absoluter Fehler aller Testwert: {abs_test_all}")
