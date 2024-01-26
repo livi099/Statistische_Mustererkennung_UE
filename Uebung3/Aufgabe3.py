@@ -113,13 +113,13 @@ schnitt_x, schnitt_y = schnittpunkt(grenze12, grenze13,x)
 # Plot
 # Trainingsdaten
 plt.figure(figsize=(6, 5))
-plt.scatter(train_values[0][:,0], train_values[0][:,1], 20, edgecolor='blue', facecolors='none', label='\u03C9\u2081')
-plt.scatter(train_values[1][:,0], train_values[1][:,1], 20, edgecolor='green', facecolors='none', label='\u03C9\u2082')
-plt.scatter(train_values[2][:,0], train_values[2][:,1], 20, edgecolor='orange', facecolors='none', label='\u03C9\u2083')
+plt.scatter(train_values[0][:,0], train_values[0][:,1], 10, edgecolor='blue', facecolors='none', label='\u03C9\u2081')
+plt.scatter(train_values[1][:,0], train_values[1][:,1], 10, edgecolor='green', facecolors='none', label='\u03C9\u2082')
+plt.scatter(train_values[2][:,0], train_values[2][:,1], 10, edgecolor='orange', facecolors='none', label='\u03C9\u2083')
 # Klassengrenzen
-plt.plot([schnitt_x, 15],[schnitt_y, grenze12[1]],'k-.', label='Klassengrenze',linewidth=0.5)
-plt.plot([-10, schnitt_x],[grenze13[0], schnitt_y],'k-.',linewidth=0.5)
-plt.plot([schnitt_x, 15],[schnitt_y, grenze23[1]],'k-.',linewidth=0.5)
+plt.plot([schnitt_x, 15],[schnitt_y, grenze12[1]], linestyle='dashed', color='black', label='Klassengrenze',linewidth=0.5)
+plt.plot([-10, schnitt_x],[grenze13[0], schnitt_y], linestyle='dashed', color='black', linewidth=0.5)
+plt.plot([schnitt_x, 15],[schnitt_y, grenze23[1]], linestyle='dashed', color='black', linewidth=0.5)
 # Beschriftung
 plt.xlabel('X')
 plt.ylabel('Y')
@@ -132,13 +132,13 @@ plt.show()
 
 # Testdaten
 plt.figure(figsize=(6, 5))
-plt.scatter(test_values[0][:,0], test_values[0][:,1], 20, edgecolor='blue', facecolors='none', label='\u03C9\u2081')
-plt.scatter(test_values[1][:,0], test_values[1][:,1], 20, edgecolor='green', facecolors='none', label='\u03C9\u2082')
-plt.scatter(test_values[2][:,0], test_values[2][:,1], 20, edgecolor='orange', facecolors='none', label='\u03C9\u2083')
+plt.scatter(test_values[0][:,0], test_values[0][:,1], 10, edgecolor='blue', facecolors='none', label='\u03C9\u2081')
+plt.scatter(test_values[1][:,0], test_values[1][:,1], 10, edgecolor='green', facecolors='none', label='\u03C9\u2082')
+plt.scatter(test_values[2][:,0], test_values[2][:,1], 10, edgecolor='orange', facecolors='none', label='\u03C9\u2083')
 # Klassengrenzen
-plt.plot([schnitt_x, 15],[schnitt_y, grenze12[1]],'k-.', label='Klassengrenze',linewidth=0.5)
-plt.plot([-10, schnitt_x],[grenze13[0], schnitt_y],'k-.',linewidth=0.5)
-plt.plot([schnitt_x, 15],[schnitt_y, grenze23[1]],'k-.',linewidth=0.5)
+plt.plot([schnitt_x, 15],[schnitt_y, grenze12[1]], linestyle='dashed', color='black', label='Klassengrenze',linewidth=0.5)
+plt.plot([-10, schnitt_x],[grenze13[0], schnitt_y], linestyle='dashed', color='black',linewidth=0.5)
+plt.plot([schnitt_x, 15],[schnitt_y, grenze23[1]], linestyle='dashed', color='black',linewidth=0.5)
 # Beschriftung
 plt.xlabel('X')
 plt.ylabel('Y')
