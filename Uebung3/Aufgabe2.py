@@ -58,11 +58,12 @@ eigenvektoren_corr = eigenvektoren_corr.T
 
 # Plot Kovarianzmatrix
 plt.figure(figsize=(10, 6))
+plt.rc('font', size=13)
 plt.plot(richtung_skaliert_cov[:, 0], richtung_skaliert_cov[:, 1],
            color='orange', label='Skalierte Richtungsvektoren')
 for i in range(len(eigenwerte_cov)):
     scaled_eigenvector = eigenvektoren_cov[i] * np.sqrt(eigenwerte_cov[i])
-    print(scaled_eigenvector)
+
     color = ['blue', 'green']
     plt.plot([0, scaled_eigenvector[0]], [0, scaled_eigenvector[1]], linestyle='--', color=color[i],
              label=f'Skalierter Eigenvektor {i + 1}')
@@ -74,6 +75,7 @@ plt.show()
 
 # Plot Korrelationsmatrix
 plt.figure(figsize=(10, 6))
+plt.rc('font', size=13)
 plt.plot(richtung_skaliert_corr[:, 0], richtung_skaliert_corr[:, 1],
             color='orange', label='Skalierte Richtungsvektoren')
 for i in range(len(eigenwerte_corr)):
